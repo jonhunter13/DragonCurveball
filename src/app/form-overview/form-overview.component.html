@@ -1,0 +1,7 @@
+<div class="form-overview">
+  <mat-list>
+    <mat-list-item *ngFor="let step of steps;" class="overview-item">
+      <span (click)="updateStep(step)">{{ step.title }}</span>
+    </mat-list-item>
+  </mat-list>
+</div>

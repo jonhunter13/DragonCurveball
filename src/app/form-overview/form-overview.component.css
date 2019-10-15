@@ -1,0 +1,12 @@
+.form-overview{
+  border-right: 2px #eeeeee solid;
+}
+
+.overview-item {
+  cursor: pointer;
+  min-height: 30px;
+}
+
+.overview-item :hover{
+  text-decoration: underline;
+}

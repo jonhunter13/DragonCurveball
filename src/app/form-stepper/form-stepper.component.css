@@ -1,0 +1,19 @@
+.question-title{
+  font-size: 2.3em;
+}
+
+.question-text{
+  font-size: 1.3em;
+}
+
+.step-buttons{
+  padding-top: 20%;
+}
+
+.radio-group{
+  margin: 15px 0;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

@@ -1,0 +1,41 @@
+<h3 class="question-title" *ngIf="step.title == 'Overview'">{{step.title}}</h3>
+<h3 class="question-title" *ngIf="step.title != 'Overview'">{{step.question}}</h3>
+<div [ngSwitch]="step.type">
+  <div *ngSwitchCase="'none'" class="question-text">{{step.question}}</div>
+  <div *ngSwitchCase="'select'">
+    <mat-select [(value)]="step.value" [(ngModel)]="step.value" placeholder="Choose One...">
+      <mat-option *ngFor="let val of step.values" [value]="val">
+        {{val}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div *ngSwitchCase="'text'">
+    <mat-form-field style="width: 50%">
+      <input matInput placeholder="Enter your answer here..." [(ngModel)]="step.value">
+    </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'date'">
+    <mat-form-field style="width: 50%">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="step.value" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'location'">
+    <mat-form-field style="width: 50%">
+      Autocomplete Location Form Field TBD
+    </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'radio'">
+    <mat-radio-group
+      class="radio-group"
+      [(ngModel)]="step.value">
+      <mat-radio-button value="Yes">Yes</mat-radio-button>
+      <mat-radio-button value="No">No</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+<div class="step-buttons">
+  <button *ngIf="previousStep" mat-button mat-raised-button (click)="goToStep(previousStep)">< Previous</button>
+  <button *ngIf="nextStep" mat-button mat-raised-button style="float: right;" (click)="goToStep(nextStep)">Next ></button>
+</div>
