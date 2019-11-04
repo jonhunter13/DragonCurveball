@@ -1,6 +1,6 @@
 <div class="form-overview">
   <mat-list>
-    <mat-list-item *ngFor="let step of steps;" class="overview-item">
+    <mat-list-item *ngFor="let step of steps;" [class]="(isDisabled(step))?'disable-item mat-list-item':'overview-item mat-list-item'">
       <span (click)="updateStep(step)">{{ step.title }}</span>
     </mat-list-item>
   </mat-list>

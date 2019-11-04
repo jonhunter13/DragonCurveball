@@ -12,7 +12,8 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatRadioModule
+  MatRadioModule,
+  MatIconModule, MatTabsModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormStepperComponent } from './form-stepper/form-stepper.component';
@@ -36,7 +37,9 @@ import { FormOverviewComponent } from './form-overview/form-overview.component';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

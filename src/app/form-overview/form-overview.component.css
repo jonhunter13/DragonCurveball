@@ -1,5 +1,4 @@
 .form-overview{
-  border-right: 2px #eeeeee solid;
 }
 
 .overview-item {
@@ -9,4 +8,9 @@
 
 .overview-item :hover{
   text-decoration: underline;
+}
+
+.disable-item{
+  color: #eeeeee;
+  min-height: 30px;
 }

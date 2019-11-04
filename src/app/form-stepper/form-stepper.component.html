@@ -2,24 +2,57 @@
 <h3 class="question-title" *ngIf="step.title != 'Overview'">{{step.question}}</h3>
 <div [ngSwitch]="step.type">
   <div *ngSwitchCase="'none'" class="question-text">{{step.question}}</div>
-  <div *ngSwitchCase="'select'">
-    <mat-select [(value)]="step.value" [(ngModel)]="step.value" placeholder="Choose One...">
-      <mat-option *ngFor="let val of step.values" [value]="val">
-        {{val}}
-      </mat-option>
-    </mat-select>
-  </div>
-  <div *ngSwitchCase="'text'">
-    <mat-form-field style="width: 50%">
-      <input matInput placeholder="Enter your answer here..." [(ngModel)]="step.value">
-    </mat-form-field>
-  </div>
-  <div *ngSwitchCase="'date'">
+  <div *ngSwitchCase="'concert_date'">
     <mat-form-field style="width: 50%">
       <input matInput [matDatepicker]="picker" [(ngModel)]="step.value" placeholder="Choose a date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'ensemble'">
+    <mat-form-field style="width: 50%">
+      <input matInput placeholder="Enter your answer here..." [(ngModel)]="step.value">
+    </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'members'">
+      <mat-list>
+        <mat-list-item *ngFor="let mem of members; let i = index;" style="width: 100%">
+          <mat-icon mat-list-icon class="remove-member" (click)="removeMember(i)">remove_circle</mat-icon>
+          <input matInput
+                 [(ngModel)]="mem.name"
+                 type="text"
+                 [placeholder]="'Player '+(i+1)+ ' Name'">
+        </mat-list-item>
+      </mat-list>
+      <button mat-button mat-raised-button (click)="addMember()">Add Member</button>
+  </div>
+  <div *ngSwitchCase="'select'">
+    <div *ngFor="let mem of members; let i = index;" style="width: 100%">
+      <mat-form-field>
+        <mat-label>Player {{mem.name}}:</mat-label>
+        <mat-select [(value)]="mem.answers[step.title]" [(ngModel)]="mem.answers[step.title]">
+          <mat-option *ngFor="let val of step.values" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngSwitchCase="'text'">
+    <div *ngFor="let mem of members; let i = index;" style="width: 100%">
+      <mat-form-field style="width: 50%">
+        <input matInput [placeholder]="'Player '+mem.name" [(ngModel)]="mem.answers[step.title]">
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngSwitchCase="'date'">
+    <div *ngFor="let mem of members; let i = index;" style="width: 100%">
+      <mat-form-field style="width: 50%">
+        <input matInput [matDatepicker]="dp" [(ngModel)]="mem.answers[step.title]" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+    </div>
   </div>
   <div *ngSwitchCase="'location'">
     <mat-form-field style="width: 50%">
@@ -27,12 +60,16 @@
     </mat-form-field>
   </div>
   <div *ngSwitchCase="'radio'">
-    <mat-radio-group
-      class="radio-group"
-      [(ngModel)]="step.value">
-      <mat-radio-button value="Yes">Yes</mat-radio-button>
-      <mat-radio-button value="No">No</mat-radio-button>
-    </mat-radio-group>
+    <div *ngFor="let mem of members; let i = index;" style="width: 100%">
+      <label id="-radio-group-label">Player {{mem.name}}: </label>
+      <mat-radio-group
+        aria-labelledby="radio-group-label"
+        class="radio-group"
+        [(ngModel)]="mem.answers[step.title]">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
   </div>
 </div>
 <div class="step-buttons">

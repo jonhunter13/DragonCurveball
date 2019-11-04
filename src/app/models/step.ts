@@ -4,4 +4,5 @@ export class Step {
   type: string;
   value?: any;
   values?: any[];
+  disabled?: boolean;
 }

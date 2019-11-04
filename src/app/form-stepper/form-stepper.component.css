@@ -10,6 +10,10 @@
   padding-top: 20%;
 }
 
+.remove-member{
+  cursor: pointer;
+}
+
 .radio-group{
   margin: 15px 0;
 }

@@ -1,29 +1,39 @@
 <div class="content" role="main">
 
   <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
+  <div class="card highlight-card card-small" (click)="reload()" style="cursor: pointer;">
     <h2>{{ title }}</h2>
   </div>
 
   <!-- Form -->
   <mat-card class="form-container" style="width: 100%">
     <div *ngIf="showForm" fxLayout="row" fxLayoutAlign="center stretch">
-      <app-form-overview fxFlex="20" [steps]="steps" (updateStepEmit)="onUpdateStep($event)"></app-form-overview>
+      <app-form-overview fxFlex="20" [steps]="steps" [members]="members" (updateStepEmit)="onUpdateStep($event)"></app-form-overview>
       <app-form-stepper *ngIf="step!=steps.length-1"
-            style="padding: 70px 20px;"
+            style="padding: 70px 20px;border-left: 2px #eeeeee solid;"
             fxFlex
             [step]="steps[step]"
             [steps]="steps"
-            (updateStepEmit)="onUpdateStep($event)">
+            [members]="members"
+            (updateStepEmit)="onUpdateStep($event)"
+            (updateMembersEmit)="onUpdateMembers($event)"
+      >
       </app-form-stepper>
       <div fxFlex *ngIf="step==steps.length-1">
-        <div fxLayout="row" fxLayoutAlign="center stretch">
-          <mat-list fxFlex="100">
-            <mat-list-item *ngFor="let step of steps;  let i = index">
-              <span *ngIf="i != 0 && i != steps.length-1" class="review-question">{{ step.question }}</span><span> {{ step.value }}</span>
-            </mat-list-item>
-          </mat-list>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <h3>{{steps[2].value}} Concert on {{steps[1].value | date: 'MM/dd/yyyy' }}</h3>
         </div>
+        <mat-tab-group>
+          <mat-tab *ngFor="let mem of members" [label]="mem.name">
+            <div fxLayout="row" fxLayoutAlign="center stretch">
+              <mat-list fxFlex="100">
+                <mat-list-item *ngFor="let step of steps;  let i = index">
+                  <span *ngIf="i > 2 && i != steps.length-1" class="review-question">{{ step.question }}</span><span> {{ mem.answers[step.title] }}</span>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
         <div fxLayout="row" fxLayoutAlign="center center">
           <div style="padding-bottom: 20px">
             <button mat-button mat-raised-button (click)="onSubmit()">Submit</button>
