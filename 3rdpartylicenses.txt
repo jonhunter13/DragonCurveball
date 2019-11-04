@@ -122,11 +122,15 @@ THE SOFTWARE.
 
 @angular/material/form-field
 
+@angular/material/icon
+
 @angular/material/list
 
 @angular/material/radio
 
 @angular/material/select
+
+@angular/material/tabs
 
 @angular/platform-browser
 MIT
